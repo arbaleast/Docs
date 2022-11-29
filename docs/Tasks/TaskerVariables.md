@@ -9,11 +9,11 @@ When Tasker encounters a variable name in a text, it replaces the name with the 
 
 The main purposes of variables are:
 
-    dynamic binding: doing something with an action with data which
+- dynamic binding: doing something with an action with data which
 
-    is unknown when the task is created e.g. respond to an SMS; the sender is not known until the SMS is received.
-    allow flow control within and between tasks
-    record data for some future use e.g. passing data between tasks 
+- is unknown when the task is created e.g. respond to an SMS; the sender is not known until the SMS is received.
+- allow flow control within and between tasks
+- record data for some future use e.g. passing data between tasks
 
 ## Global vs. Local Variables
 
@@ -27,6 +27,7 @@ The values of built-In variables are updated automatically by Tasker.
 
 ### Local Built-In Variables
 
+```text
     Action Error
     %err
     Is set to an integer if an error occurred when running the last action. The actual number can signify the error which occurred, but is usually 1 for most Tasker actions (notable exception: Run Shell and plugins). Every action sets or clears it, so it must be saved (e.g. with Variable Set) if it will be needed later than in the immediate next action.
@@ -69,10 +70,12 @@ The values of built-In variables are updated automatically by Tasker.
         task
         another task, from a Perform Task action. subcallername is the task name, if it has one, otherwise anon
         powermenu
-        the power menu on Android 11+. 
+        the power menu on Android 11+.
+```
 
 ### Global Built-In Variables
 
+```text
     Airplane Mode Status(dynamic)
     %AIR
     Whether Airplane Mode is on or off
@@ -370,7 +373,8 @@ The values of built-In variables are updated automatically by Tasker.
     %WIN
     The label of the current window, which could be a full-screen activity or a dialog.
     Not set if the label is unknown.
-    For some windows, the label might be that of the first item in the window e.g. a menu entry or even a button. 
+    For some windows, the label might be that of the first item in the window e.g. a menu entry or even a button.
+```
 
 ### General Notes
 
@@ -473,6 +477,7 @@ They are especially useful when used with the For action, since you can perform 
 
 If the four variables %arr1, %arr2, %arr3, %arr4 hold respectively alpha,beta,cat and dog then we have an array with 4 elements. These variables can be used just like any other, however it is also possible to access them in special ways. Here are some examples:
 
+```text
     %arr(#)
     The number of defined array elements (4 in this case)
     %arr(#>)
@@ -506,7 +511,8 @@ If the four variables %arr1, %arr2, %arr3, %arr4 hold respectively alpha,beta,ca
     %arr($?search)
     All of the array element values that match the pattern specificed in search, Example: %arr($?*dog*) will return all array values that contain dog anywhere in the value.
     %arr($?~Rregex here)
-    Same as above but with regex matching 
+    Same as above but with regex matching
+```
 
 Notes:
 
@@ -577,19 +583,21 @@ Check below to find out how to read the supported structure types.
 
 Consider the following JSON stucture:
 
-    {
-        "names":[
-            {
-                "name":"João",
-                "lastname":"Dias"
-            },
-            {
-                "name":"John",
-                "lastname":"Days",
-                "age": 99
-            }
-        ]
-    }
+```json
+{
+    "names":[
+        {
+            "name":"João",
+            "lastname":"Dias"
+        },
+        {
+            "name":"John",
+            "lastname":"Days",
+            "age": 99
+        }
+    ]
+}
+```
 
 Starting in version 5.12 Tasker can read the values directly. You can either use the dot or square bracket notations as shown below (consider there's a variable named %json with the above text).
 
@@ -610,18 +618,20 @@ Notes:
 
 Consider the following HTML stucture:
 
-    <!DOCTYPE html>
-    <html>
-        <head>
-            <title>Test HTML For Tasker</title>
-        </head>
-        <body>
-            <h1>Hello!</h1>
-            <div>How are you?</div>
-            <div>I'm fine!</div>
-            <img src="image.jpg" />
-        </body>
-    </html>
+```html
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Test HTML For Tasker</title>
+    </head>
+    <body>
+        <h1>Hello!</h1>
+        <div>How are you?</div>
+        <div>I'm fine!</div>
+        <img src="image.jpg" />
+    </body>
+</html>
+```
 
 Starting in version 5.12 Tasker can read the values directly. You can either use the dot or square bracket notations as shown below (consider there's a variable named %html with the above text).
 
@@ -640,10 +650,12 @@ Notes:
 
 Consider the following CSV stucture:
 
+```text
 name,age,town
 Jack,41,London
 Lindsey,12,New York
 Eddie,54,Lisbon
+```
 
 Starting in version 5.12 Tasker can read the values directly. You can either use the dot or square bracket notations as shown below (consider there's a variable named %csv with the above text).
 
@@ -653,5 +665,5 @@ Starting in version 5.12 Tasker can read the values directly. You can either use
 Notes:
 
 - You can't use invalid Tasker variable name characters if you use the dot notation. For example, if you need to read a CSV value with the key some thing (notice the space) you have to use the square bracket notation.
-    You can use any Tasker array features on these. For example, you can use %csv.name(<) to get the last name of the above structure.
-    If you plan to use these in the List Dialog action as an input of the Items field use %csv.name directly, and not %csv.name(), since the latter will produce a comma separated list which will conflict with your data if it already contains commas.
+- You can use any Tasker array features on these. For example, you can use %csv.name(<) to get the last name of the above structure.
+- If you plan to use these in the List Dialog action as an input of the Items field use %csv.name directly, and not %csv.name(), since the latter will produce a comma separated list which will conflict with your data if it already contains commas.
